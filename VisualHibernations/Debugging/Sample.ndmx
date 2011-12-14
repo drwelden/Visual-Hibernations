@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="77d23f3e-e07a-420a-b3e5-2d25dda41c1b" name="Library Model" xmlns="http://schemas.microsoft.com/dsltools/VisualHibernations">
+  <types>
+    <modelClass Id="ae7a6efb-3ab2-41d0-957a-e28571839d79" name="Item">
+      <operations>
+        <classOperation Id="fcd44986-1d33-4b75-9e39-f4b162f36d82" name="Lend" isAbstract="false" />
+        <classOperation Id="dcc97fd0-d56b-4a83-a290-faf2a9608e36" name="Return" isAbstract="false" />
+      </operations>
+      <subclasses>
+        <generalization Id="68a0fc53-8ec3-4e60-a66f-f46bec38097f">
+          <modelClassMoniker name="/Library Model/Book" />
+        </generalization>
+      </subclasses>
+    </modelClass>
+    <modelClass Id="6837f84f-7e30-4225-a48b-5769db4c0184" name="Title">
+      <attributes>
+        <modelAttribute Id="8423482e-ab8c-4ce7-a521-7e99e7cd4a84" name="name" type="string" />
+      </attributes>
+      <bidirectionalTargets>
+        <bidirectionalAssociation Id="52d12ed6-b070-440a-bfe9-4707c83b9a99" sourceMultiplicity="One" sourceRoleName="title" targetRoleName="stock">
+          <modelClassMoniker name="/Library Model/Item" />
+        </bidirectionalAssociation>
+      </bidirectionalTargets>
+    </modelClass>
+    <modelClass Id="763a0698-0348-4175-91e1-042fa2649f3b" name="Book" />
+    <modelClass Id="ea7bc1a8-ddee-415b-9d54-4ae3c91d0fc4" name="Member" />
+    <modelClass Id="7d8b5f51-e068-4310-af25-667e0e4cf290" name="Library">
+      <aggregationTargets>
+        <aggregation Id="9aaf0495-4db7-4a77-a3d9-554a5dafd537" targetRoleName="catalog">
+          <modelClassMoniker name="/Library Model/Title" />
+        </aggregation>
+        <aggregation Id="06ef5f9e-47cb-4b83-99e3-b3dbaea6a6ec" sourceMultiplicity="ZeroOne" targetRoleName="stock">
+          <modelClassMoniker name="/Library Model/Item" />
+        </aggregation>
+        <aggregation Id="b859c7ec-2b9d-4c74-90b9-a8f3a79d56e4" targetRoleName="membership">
+          <modelClassMoniker name="/Library Model/Member" />
+        </aggregation>
+      </aggregationTargets>
+    </modelClass>
+    <modelClass Id="6e3eba8f-d0d6-4179-9e3a-02d2a0cd14e8" name="Loan">
+      <attributes>
+        <modelAttribute Id="0520005c-d199-48aa-a57d-8234411da38f" name="commenced" type="Date" />
+      </attributes>
+    </modelClass>
+    <multipleAssociation Id="fd1ff41b-5ef3-4383-918c-d9da2817f21e" name="MultipleAssociation1">
+      <types>
+        <multipleAssociationRole Id="3f17f1f5-3bfc-43b4-8cb0-2952e8199a69" multiplicity="One" roleName="reserver">
+          <modelClassMoniker name="/Library Model/Member" />
+        </multipleAssociationRole>
+        <multipleAssociationRole Id="8978b32b-a691-4030-a75f-27c2fa28d1fa" multiplicity="One">
+          <modelClassMoniker name="/Library Model/Title" />
+        </multipleAssociationRole>
+        <multipleAssociationRole Id="8a4a7150-0277-4d8b-a6b2-5755be7ae33c" multiplicity="One">
+          <modelClassMoniker name="/Library Model/Library" />
+        </multipleAssociationRole>
+      </types>
+      <associationClass>
+        <modelClassMoniker name="/Library Model/Reservation" />
+      </associationClass>
+    </multipleAssociation>
+    <modelClass Id="e6fcfa7b-3a11-46f7-8fb8-6c46bb9676d5" name="Reservation">
+      <attributes>
+        <modelAttribute Id="04ba5b6a-1039-40ea-873f-d8e6bc151376" name="made" type="Date" />
+      </attributes>
+    </modelClass>
+    <multipleAssociation Id="faa3a845-7fc5-48d4-9582-5b30bdaff8aa" name="MultipleAssociation2">
+      <types>
+        <multipleAssociationRole Id="9cf25707-5b9c-4c34-a87f-7939877e4b9c" multiplicity="One">
+          <modelClassMoniker name="/Library Model/Member" />
+        </multipleAssociationRole>
+        <multipleAssociationRole Id="a51fe071-c209-4fb6-bf3e-215914a5787e" multiplicity="One">
+          <modelClassMoniker name="/Library Model/Item" />
+        </multipleAssociationRole>
+      </types>
+      <associationClass>
+        <modelClassMoniker name="/Library Model/Loan" />
+      </associationClass>
+    </multipleAssociation>
+  </types>
+</modelRoot>
